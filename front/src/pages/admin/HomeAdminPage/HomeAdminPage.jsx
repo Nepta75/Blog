@@ -20,7 +20,7 @@ const HomeAdminPage = () => {
   return (
     <HomeAdminPageStyled>
       <Button onClick={() => history.push('/admin/post/') } value="Posts: " />
-      <Button onClick={() => history.push('/admin/category/') } value="Catégories: " />
+      <Button onClick={() => history.push('/admin/cat/') } value="Catégories: " />
       <Button onClick={() => history.push('/admin/user/') } value="Utilisateurs: "/>
     </HomeAdminPageStyled>
   );

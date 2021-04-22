@@ -1,7 +1,9 @@
 const postSchema = require('../models/postModel');
 
 exports.getAllPost = (req, res) => {
-  postSchema.find({}, (err, posts) => {
+  postSchema.find().
+  populate('category').
+  exec((err, posts) => {
     if (err) {
       res.send(err);
     }
@@ -20,7 +22,9 @@ exports.createPost = (req, res) => {
 };
 
 exports.getPostById = (req, res) => {
-  postSchema.findById(req.params.postId, (err, post) => {
+  postSchema.findById(req.params.postId)
+  .populate('category')
+  .exec((err, post) => {
     if (err) {
       res.send(err);
     }
@@ -29,6 +33,7 @@ exports.getPostById = (req, res) => {
 };
 
 exports.updatePostById = (req, res) => {
+  console.log('req.body :>> ', req.body);
   postSchema.findOneAndUpdate({ _id: req.params.postId}, req.body, {}, (err, post) => {
     if (err) {
       res.send(err);

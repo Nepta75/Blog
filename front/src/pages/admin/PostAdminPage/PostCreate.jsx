@@ -1,7 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import { PostAdminPageStyled } from './PostAdminPage.style';
 import { useHistory } from 'react-router-dom';
-import { getRessource, createRessource } from '../../../services/apiServices';
+import { createRessource, getRessources } from '../../../services/apiServices';
 import { PostForm } from './PostForm';
 import { Button } from '../../../components/ui-elements/Button/Button';
 
@@ -10,6 +10,7 @@ const PostCreate = ({
 }) => {
 
   const [inputs, setInputs] = useState({});
+  const [categories, setCategories] = useState([]);
   const history = useHistory();
 
   const handleInputChange = (event) => {
@@ -22,17 +23,10 @@ const PostCreate = ({
   }
 
   useEffect(() => {
-    if (!postId) return null;
-
-    getRessource('post', postId).then(data => {
-      if (data.success) {
-        setInputs({
-          title: data.title,
-          id: data._id,
-          titleDesc: data.title_description,
-          imageUrl: data.image,
-          content: data.contenu,
-        });
+    getRessources('cat').then(data => {
+      console.log('data :>> ', data);
+      if (data) {
+        setCategories(data);
       }
     });
 
@@ -43,6 +37,7 @@ const PostCreate = ({
       <PostForm 
         handleInputChange={handleInputChange}
         getValue={getValue}
+        categories={categories}
       />
       <div className="button-container">
         <Button
@@ -52,6 +47,7 @@ const PostCreate = ({
               title_description: getValue("titleDesc"),
               image: getValue("imageUrl"),
               contenu: getValue("content"),
+              category: getValue("category"),
             });
             history.push('/admin');
           }}

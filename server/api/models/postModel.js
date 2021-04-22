@@ -24,6 +24,10 @@ const postSchema = new Schema({
   updated: {
     type: Date,
     default: Date.now
+  },
+  category: {
+    type: Schema.Types.ObjectId,
+    ref: "categories",
   }
 });
 

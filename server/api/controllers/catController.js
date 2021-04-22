@@ -20,7 +20,7 @@ exports.createCat = (req, res) => {
 };
 
 exports.getCatById = (req, res) => {
-  catSchema.findById(req.params.postId, (err, post) => {
+  catSchema.findById(req.params.catId, (err, post) => {
     if (err) {
       res.send(err);
     }
@@ -29,7 +29,7 @@ exports.getCatById = (req, res) => {
 };
 
 exports.updateCatById = (req, res) => {
-  catSchema.findOneAndUpdate({ _id: req.params.postId}, req.body, {}, (err, post) => {
+  catSchema.findOneAndUpdate({ _id: req.params.catId}, req.body, {}, (err, post) => {
     if (err) {
       res.send(err);
     }
@@ -39,7 +39,7 @@ exports.updateCatById = (req, res) => {
 
 exports.deleteCatById = (req, res) => {
   catSchema.deleteOne({
-    _id: req.params.postId
+    _id: req.params.catId
   }, (err, post) => {
     if (err) {
       res.send(err);
